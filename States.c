@@ -44,8 +44,8 @@ BooleanType controlMenu(){
 			currentSystem.stateIndex = 0;//restore the initial configuration of the screen
 			currentSystem.currentStatus = PRINCIPAL;
 	}
-
-	currentSystem.stateIndex++;//update the sub function index for the next lap
+	else
+		currentSystem.stateIndex++;//update the sub function index for the next lap
 
 	controlSystem();//update the serial port screen
 	clearEnter();//clear enter flag, which is enabled in the UART interruption
