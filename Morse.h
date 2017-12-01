@@ -26,4 +26,6 @@ BooleanType printDot();
 
 BooleanType printLine();
 
+BooleanType morseDelay();
+
 #endif

@@ -67,3 +67,29 @@ BooleanType setStartTransmition(BooleanType start){
 	startTransmition = start;
 	return TRUE;
 }
+
+BooleanType delayLEDs(uint16 delay)
+{
+	volatile uint16 counter;
+
+	for(counter=delay; counter > 0; counter--)
+	{
+	}
+	return TRUE;
+}
+
+BooleanType turnLEDsOff(){
+			GPIOB->PDOR |= 0x00200000;/**Blue led off*/
+			delayLEDs(1000);//65000
+			GPIOB->PDOR |= 0x00400000;/**Read led off*/
+			delayLEDs(1000);
+			GPIOE->PDOR |= 0x4000000;/**Green led off*/
+			delayLEDs(1000);
+			return TRUE;
+}
+
+BooleanType blueLEDOn(){
+		turnLEDsOff();
+	GPIOB->PDOR &= ~(0x00200000);/**Blue led on*/
+	return TRUE;
+}

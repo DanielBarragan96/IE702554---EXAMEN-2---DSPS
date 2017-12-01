@@ -89,4 +89,10 @@ BooleanType controlMenu();
  */
 SystemControl* getSystem();
 
+BooleanType delayLEDs(uint16 delay);
+
+BooleanType turnLEDsOff();
+
+BooleanType blueLEDOn();
+
 #endif /*STATES_H_*/

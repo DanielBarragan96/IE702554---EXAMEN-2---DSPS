@@ -8,7 +8,7 @@
 #include "TeraTerm.h"
 #include "GPIO.h"
 #include "Morse.h"
-
+#include "PIT.h"
 
 MorseWord morse[WORDS_SIZE] = {
 		{'A',{DOT,LINE,END}},
@@ -73,18 +73,28 @@ BooleanType showMorseWord(uint8 index){
 		else if(LINE == printMorse.simbol[morseIndex])
 			printLine();
 	}
-
 	return TRUE;
 }
 
 BooleanType printDot(){
-
-
+	PIT_clear(PIT_0);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 0.5F);
+	blueLEDOn();
+	morseDelay();
+	turnLEDsOff();
 	return TRUE;
 }
 
 BooleanType printLine(){
+	PIT_clear(PIT_0);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
+	blueLEDOn();
+	morseDelay();
+	turnLEDsOff();
+	return TRUE;
+}
 
-
+BooleanType morseDelay(){
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 0.5F);
 	return TRUE;
 }
