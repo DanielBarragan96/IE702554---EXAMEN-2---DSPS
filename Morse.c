@@ -12,7 +12,7 @@
 
 MorseWord morse[WORDS_SIZE] = {
 		{'A',{DOT,LINE,END}},
-		{'B',{LINE,DOT,DOT,DOT}},
+		{'B',{LINE,DOT,DOT,DOT,END}},
 		{'C',{LINE,DOT,LINE,DOT,END}},
 		{'D',{LINE,DOT,DOT,END}},
 		{'E',{DOT,END}},
@@ -58,7 +58,7 @@ BooleanType startDecodeMorse(){
 				showMorseWord(index);
 				return FALSE;
 			}
-
+			index++;
 		}
 	}
 	return TRUE;//the char readed is not stored in the Morse table
@@ -80,7 +80,7 @@ BooleanType showMorseWord(uint8 index){
 BooleanType printDot(){
 	PIT_clear(PIT_0);
 	blueLEDOn();
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 2.0F);
 	while(!PIT_getIntrStutus(PIT_0));
 	turnLEDsOff();
 	morseDelay();
@@ -90,7 +90,7 @@ BooleanType printDot(){
 BooleanType printLine(){
 	PIT_clear(PIT_0);
 	blueLEDOn();
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 2.0F);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 4.0F);
 	while(!PIT_getIntrStutus(PIT_0));
 	turnLEDsOff();
 	morseDelay();
@@ -99,7 +99,7 @@ BooleanType printLine(){
 
 BooleanType morseDelay(){
 	PIT_clear(PIT_0);
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 2.0F);
 	while(!PIT_getIntrStutus(PIT_0));
 	return TRUE;
 }
