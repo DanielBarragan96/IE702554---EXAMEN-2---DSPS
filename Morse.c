@@ -72,29 +72,33 @@ BooleanType showMorseWord(uint8 index){
 			printDot();
 		else if(LINE == printMorse.simbol[morseIndex])
 			printLine();
+		morseIndex++;
 	}
 	return TRUE;
 }
 
 BooleanType printDot(){
 	PIT_clear(PIT_0);
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 0.5F);
 	blueLEDOn();
-	morseDelay();
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 0.5F);
+	while(!PIT_getIntrStutus(PIT_0));
 	turnLEDsOff();
+	morseDelay();
 	return TRUE;
 }
 
 BooleanType printLine(){
 	PIT_clear(PIT_0);
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
 	blueLEDOn();
-	morseDelay();
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
+	while(!PIT_getIntrStutus(PIT_0));
 	turnLEDsOff();
+	morseDelay();
 	return TRUE;
 }
 
 BooleanType morseDelay(){
 	PIT_delay(PIT_0, SYSTEM_CLOCK, 0.5F);
+	while(!PIT_getIntrStutus(PIT_0));
 	return TRUE;
 }

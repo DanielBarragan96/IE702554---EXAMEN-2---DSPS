@@ -36,7 +36,6 @@ BooleanType controlSystem(){//control system alternates the sub functions inside
 	else if(ONE== currentSystem.stateIndex) FSM_Moore[index].fptrSecond();
 	else if(TWO == currentSystem.stateIndex) FSM_Moore[index].fptrThird();
 
-	currentSystem.stateIndex++;//update the sub function index for the next lap
 	return TRUE;
 }
 
@@ -45,13 +44,8 @@ BooleanType controlMenu(){
 			currentSystem.stateIndex = 0;//restore the initial configuration of the screen
 			currentSystem.currentStatus = PRINCIPAL;
 	}
-	else if(PRINCIPAL == currentSystem.currentStatus){//if we are in the main menu select next menu
-		if(ONE < getFIFOIndex()) noFunction();//if the FIFO has more than one element do nothing
-		if(PLAY == (*getFIFO())) currentSystem.currentStatus = PLAY;
-		else if(DIFFICULTY == (*getFIFO())) currentSystem.currentStatus = DIFFICULTY;
-		else if(RECORDS == (*getFIFO())) currentSystem.currentStatus = RECORDS;
-		currentSystem.stateIndex = 0;//because we have changed of menu, we have to reset the index
-	}
+
+	currentSystem.stateIndex++;//update the sub function index for the next lap
 
 	controlSystem();//update the serial port screen
 	clearEnter();//clear enter flag, which is enabled in the UART interruption
@@ -80,11 +74,6 @@ BooleanType delayLEDs(uint16 delay)
 
 BooleanType turnLEDsOff(){
 			GPIOB->PDOR |= 0x00200000;/**Blue led off*/
-			delayLEDs(1000);//65000
-			GPIOB->PDOR |= 0x00400000;/**Read led off*/
-			delayLEDs(1000);
-			GPIOE->PDOR |= 0x4000000;/**Green led off*/
-			delayLEDs(1000);
 			return TRUE;
 }
 
