@@ -8,11 +8,13 @@
 #include "TeraTerm.h"
 #include "GPIO.h"
 
+static BooleanType startTransmition = FALSE;
+
 //This structure is used for controlling the menus shown in the serial port
 //Each menu has up to 3 sub stages which are changed whenever controlSystem is used
 const StateType FSM_Moore[] =
 	{
-			{&printTTMainMenu,&controlMenu,&noFunction},
+			{&printTTMainMenu,&TTstartTransmission,&noFunction},
 			{&noFunction,&noFunction,&noFunction},
 			{&noFunction,&noFunction,&noFunction},
 			{&noFunction,&noFunction,&noFunction}
@@ -59,3 +61,9 @@ BooleanType controlMenu(){
 
 SystemControl* getSystem(){ return &currentSystem; }//return currentSstem direction
 
+BooleanType getStartTransmition(){ return startTransmition;	}
+
+BooleanType setStartTransmition(BooleanType start){
+	startTransmition = start;
+	return TRUE;
+}

@@ -7,6 +7,7 @@
 #include "States.h"
 #include "PIT.h"
 #include "States.h"
+#include "Morse.h"
 
 TeraTermStatus printTTMainMenu(){
 
@@ -27,3 +28,20 @@ TeraTermStatus printTTMainMenu(){
 	return GOOD;
 }
 
+TeraTermStatus TTstartTransmission(){
+	/* VT100 command for positioning the cursor in x and y position*/
+	UART_putString(UART_0,"\033[8;10H");
+	UART_putString(UART_0, "Su mensaje está siendo procesado. \r");
+
+	BooleanType error = FALSE;
+
+	while(!isFIFOEmpty()){
+		error = startDecodeMorse();
+		if(error){
+			UART_putString(UART_0, "Error en mensaje ingresado. \r");
+			return FALSE;
+		}
+	}
+
+	return GOOD;
+}

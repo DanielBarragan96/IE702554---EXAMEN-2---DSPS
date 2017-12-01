@@ -56,5 +56,7 @@ BooleanType clearFIFO();
  */
 sint8 getFIFOIndex();
 
+BooleanType isFIFOEmpty();
+
 #endif /* FIFO_H_ */
 

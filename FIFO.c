@@ -54,3 +54,7 @@ BooleanType clearFIFO(){
 	return TRUE;
 }
 sint8 getFIFOIndex(){ return FIFOIndex; }//return FIFOIndex value
+
+BooleanType isFIFOEmpty(){
+	return empty;
+}

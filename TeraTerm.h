@@ -29,5 +29,6 @@ typedef enum{
  */
 TeraTermStatus printTTMainMenu();
 
+TeraTermStatus TTstartTransmission();
 
 #endif /* TERATERM_H_ */
