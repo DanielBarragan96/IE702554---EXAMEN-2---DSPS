@@ -36,7 +36,7 @@ TeraTermStatus TTstartTransmission(){
 	BooleanType error = FALSE;
 
 	while(!isFIFOEmpty()){
-		error = startDecodeMorse();
+		error = (startDecodeMorse());
 		if(error){
 			UART_putString(UART_0, "Error en mensaje ingresado. \r");
 			return FALSE;

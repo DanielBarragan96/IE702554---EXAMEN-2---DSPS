@@ -56,12 +56,12 @@ BooleanType startDecodeMorse(){
 		while(WORDS_SIZE > index){
 			if(morse[index].word == word){
 				showMorseWord(index);
-				return TRUE;
+				return FALSE;
 			}
 
 		}
 	}
-	return FALSE;//the char readed is not stored in the Morse table
+	return TRUE;//the char readed is not stored in the Morse table
 }
 
 BooleanType showMorseWord(uint8 index){
@@ -80,7 +80,7 @@ BooleanType showMorseWord(uint8 index){
 BooleanType printDot(){
 	PIT_clear(PIT_0);
 	blueLEDOn();
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 0.5F);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
 	while(!PIT_getIntrStutus(PIT_0));
 	turnLEDsOff();
 	morseDelay();
@@ -90,7 +90,7 @@ BooleanType printDot(){
 BooleanType printLine(){
 	PIT_clear(PIT_0);
 	blueLEDOn();
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 2.0F);
 	while(!PIT_getIntrStutus(PIT_0));
 	turnLEDsOff();
 	morseDelay();
@@ -98,7 +98,8 @@ BooleanType printLine(){
 }
 
 BooleanType morseDelay(){
-	PIT_delay(PIT_0, SYSTEM_CLOCK, 0.5F);
+	PIT_clear(PIT_0);
+	PIT_delay(PIT_0, SYSTEM_CLOCK, 1.0F);
 	while(!PIT_getIntrStutus(PIT_0));
 	return TRUE;
 }
