@@ -43,6 +43,7 @@ BooleanType controlMenu(){
 	if(STATE_MACHINE_SIZE <= currentSystem.stateIndex){//if we overpassed the state machine size
 			currentSystem.stateIndex = 0;//restore the initial configuration of the screen
 			currentSystem.currentStatus = PRINCIPAL;
+			startTransmition = FALSE;
 	}
 	else
 		currentSystem.stateIndex++;//update the sub function index for the next lap

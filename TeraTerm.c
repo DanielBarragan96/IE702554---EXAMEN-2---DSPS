@@ -31,17 +31,24 @@ TeraTermStatus printTTMainMenu(){
 TeraTermStatus TTstartTransmission(){
 	/* VT100 command for positioning the cursor in x and y position*/
 	UART_putString(UART_0,"\033[8;10H");
-	UART_putString(UART_0, "Su mensaje está siendo procesado. \r");
+	UART_putString(UART_0, "Su mensaje esta siendo procesado. \r");
 
 	BooleanType error = FALSE;
 
 	while(!isFIFOEmpty()){
 		error = (startDecodeMorse());
 		if(error){
+			UART_putString(UART_0,"\033[8;10H");
 			UART_putString(UART_0, "Error en mensaje ingresado. \r");
+			UART_putString(UART_0,"\033[11;10H");
+			UART_putString(UART_0, "Presione ENTER para enviar otro mensaje. \r");
 			return FALSE;
 		}
 	}
-
+	/** VT100 command for positioning the cursor in x and y position*/
+	UART_putString(UART_0,"\033[10;10H");
+	UART_putString(UART_0, "Fin del mensaje.\r");
+	UART_putString(UART_0,"\033[11;10H");
+	UART_putString(UART_0, "Presione ENTER para enviar otro mensaje. \r");
 	return GOOD;
 }
